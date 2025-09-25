@@ -1,80 +1,204 @@
 <!doctype html>
-<div class="logo" aria-hidden="true"></div>
-<div>
-<h1>Mein Cartoon‑Avatar liest ein Buch</h1>
-<div class="note"></div>
-</div>
-</div>
-<div class="btns">
-<a class="button" href="#video" id="scrollToVideo">Zum Video</a>
-<a class="button" target="_blank" rel="noopener" href="https://github.com/">Repo öffnen</a>
-</div>
-</header>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mein Cartoon‑Avatar liest ein Buch</title>
+  <meta name="description" content="Eine moderne, schicke One‑Pager‑Site für ein Cartoon‑Avatar‑Video (liest ein Buch)." />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap">
+  <style>
+    :root {
+      --bg: #0b1020;
+      --surface: #0f1630;
+      --card: #121a39;
+      --edge: rgba(255,255,255,.08);
+      --text: #eaf0ff;
+      --muted: #a6b1d6;
+      --accent: #7c5cff;
+      --accent-2: #41ebc4;
+      --ring: rgba(124, 92, 255, .45);
+      --radius: 18px;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--text);
+      background:
+        radial-gradient(1400px 900px at 100% -10%, rgba(124,92,255,.22), transparent 60%),
+        radial-gradient(1000px 900px at -20% 120%, rgba(65,235,196,.18), transparent 55%),
+        var(--bg);
+    }
+    a { color: inherit; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 20px; }
 
-<main class="card">
-<div class="video-shell" id="video">
-<video
-controls
-playsinline
-preload="metadata"
-poster="assets/poster.jpg"
-aria-label="Cartoon-Avatar liest ein Buch">
-<source src="assets/avatar.mp4" type="video/mp4" />
-<!-- Fallback: -->
-Dein Browser unterstützt das HTML5-Video-Element nicht.
-</video>
-</div>
+    /* ===== Header / Nav ===== */
+    header.nav { position: sticky; top: 0; z-index: 20; backdrop-filter: blur(10px); background: linear-gradient(to bottom, rgba(11,16,32,.9), rgba(11,16,32,.5)); border-bottom: 1px solid var(--edge); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 0; }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 800; letter-spacing: .2px; }
+    .logo { width: 38px; height: 38px; border-radius: 12px; background: conic-gradient(from 180deg at 50% 50%, var(--accent), var(--accent-2)); box-shadow: 0 8px 24px rgba(124,92,255,.35), inset 0 0 14px rgba(255,255,255,.2); }
+    nav ul { display: flex; gap: 14px; list-style: none; margin: 0; padding: 0; }
+    .btn, .chip { border: 1px solid var(--edge); background: rgba(124,92,255,.12); color: var(--text); padding: 10px 14px; border-radius: 12px; text-decoration: none; font-weight: 600; box-shadow: 0 4px 16px rgba(124,92,255,.22); transition: transform .08s ease, background .2s ease, border-color .2s ease; }
+    .btn:hover { transform: translateY(-1px); border-color: rgba(255,255,255,.25); background: rgba(124,92,255,.18); }
 
-<div class="meta">
-<p class="note">
-Tipp: Für Autoplay muss das Video <span class="kbd">muted</span> sein. Füge dazu das Attribut <span class="kbd">muted</span> am <span class="kbd">&lt;video&gt;</span>-Tag hinzu, wenn du möchtest, dass es beim Laden startet.
-</p>
-<div class="btns">
-<button id="toggleTheme" aria-pressed="false">Theme wechseln</button>
-<button id="playPause">Play/Pause</button>
-<a class="button" download href="assets/avatar.mp4">Video herunterladen</a>
-</div>
-</div>
-</main>
+    /* ===== Hero ===== */
+    .hero { display: grid; grid-template-columns: 1.1fr .9fr; gap: 22px; align-items: center; padding: 42px 0 10px; }
+    .hero .card { padding: 26px; border-radius: var(--radius); background: linear-gradient(180deg, rgba(18,26,57,.8), rgba(18,26,57,.55)); border: 1px solid var(--edge); box-shadow: var(--shadow); }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; color: var(--muted); background: rgba(255,255,255,.06); border: 1px solid var(--edge); padding: 6px 10px; border-radius: 999px; }
+    h1 { font-size: clamp(28px, 4.6vw, 52px); margin: 10px 0 8px; line-height: 1.05; }
+    .lead { color: var(--muted); font-size: clamp(16px, 2.2vw, 18px); }
+    .cta { display: flex; gap: 12px; margin-top: 14px; flex-wrap: wrap; }
+    .cta .btn.primary { background: linear-gradient(135deg, var(--accent), var(--accent-2)); border: none; box-shadow: 0 10px 28px rgba(124,92,255,.45); }
 
-<footer>
-<p>
-<strong>Hinweis zur Produktion des Cartoon-Videos:</strong> Du kannst dein Realvideo mit Tools wie "Cartoon" in After Effects, Toon Boom/Harmony, oder KI‑Stilisierung (z. B. Stable Video Diffusion, Runway) in einen Cartoon-Look umwandeln. Achte auf ein Seitenverhältnis, das zu dieser Seite passt (z. B. 16:9 oder 9:16).
-</p>
-</footer>
-</div>
+    .hero-media { position: relative; }
+    .glow { position: absolute; inset: -6%; filter: blur(40px); background: radial-gradient(400px 260px at 30% 20%, rgba(124,92,255,.35), transparent 60%), radial-gradient(380px 260px at 70% 60%, rgba(65,235,196,.25), transparent 60%); z-index: 0; pointer-events: none; }
+    .frame { position: relative; z-index: 1; border-radius: 22px; overflow: hidden; border: 1px solid var(--edge); box-shadow: var(--shadow); }
 
-<script>
-const videoEl = document.querySelector('video');
-const toggleThemeBtn = document.getElementById('toggleTheme');
-const playPauseBtn = document.getElementById('playPause');
-const scrollBtn = document.getElementById('scrollToVideo');
+    video { width: 100%; height: auto; display: block; background: #000; }
 
-// Smooth scroll
-scrollBtn?.addEventListener('click', (e) => {
-e.preventDefault();
-document.getElementById('video')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-});
+    /* ===== Features ===== */
+    .section { padding: 40px 0 10px; }
+    .section h2 { font-size: clamp(22px, 3.4vw, 34px); margin: 0 0 14px; }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .feature { background: rgba(255,255,255,.04); border: 1px solid var(--edge); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); }
+    .feature h3 { margin: 10px 0 6px; font-size: 18px; }
+    .muted { color: var(--muted); }
 
-// Theme toggle (hell/dunkel)
-let dark = true;
-toggleThemeBtn?.addEventListener('click', () => {
-dark = !dark;
-document.documentElement.style.setProperty('--bg', dark ? '#0b1020' : '#f4f5ff');
-document.documentElement.style.setProperty('--card', dark ? '#11162a' : '#ffffff');
-document.documentElement.style.setProperty('--text', dark ? '#e9edff' : '#0b1020');
-document.documentElement.style.setProperty('--muted', dark ? '#9aa3c0' : '#44506b');
-toggleThemeBtn.setAttribute('aria-pressed', String(!dark));
-});
+    /* ===== Transcript / FAQ ===== */
+    details { background: rgba(255,255,255,.04); border: 1px solid var(--edge); border-radius: 14px; padding: 12px 14px; }
+    summary { cursor: pointer; font-weight: 700; }
+    .faq { display: grid; gap: 12px; }
 
-// Play/Pause helper
-playPauseBtn?.addEventListener('click', async () => {
-if (videoEl.paused) {
-try { await videoEl.play(); } catch (e) { console.warn(e); }
-} else {
-videoEl.pause(); 
-}
-});
-</script>
+    /* ===== Footer ===== */
+    footer { margin: 28px 0 32px; color: var(--muted); }
+    .hr { height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,.12), transparent); margin: 28px 0; }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 960px) {
+      .hero { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 760px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <div class="brand"><div class="logo" aria-hidden="true"></div> Cartoon‑Avatar</div>
+      <nav>
+        <ul>
+          <li><a class="chip" href="#video">Zum Video</a></li>
+          <li><a class="chip" href="#features">Features</a></li>
+          <li><a class="chip" href="#kontakt">Kontakt</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- HERO -->
+    <section class="hero" aria-label="Einführung">
+      <div class="card">
+        <span class="eyebrow">Neu • Eigenes Avatar‑Video</span>
+        <h1>Mein Cartoon‑Avatar <br>liest ein Buch</h1>
+        <p class="lead">Minimaler Code, maximale Wirkung: Eine moderne, schnelle Ein‑Seiten‑Webapp, die dein Video prominent präsentiert – inklusive Dark‑/Light‑Modus, FAQ, Untertitel‑Platzhalter und Download‑Link.</p>
+        <div class="cta">
+          <a class="btn primary" href="#video">▶️ Video ansehen</a>
+          <a class="btn" target="_blank" rel="noopener" href="https://github.com/">Quellcode auf GitHub</a>
+        </div>
+      </div>
+
+      <div class="hero-media">
+        <div class="glow" aria-hidden="true"></div>
+        <div class="frame" id="video">
+          <video controls playsinline preload="metadata" poster="assets/poster.jpg" aria-label="Cartoon‑Avatar liest ein Buch">
+            <source src="assets/avatar.mp4" type="video/mp4" />
+            Dein Browser unterstützt das HTML5‑Video nicht.
+          </video>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features" class="section" aria-label="Eigenschaften">
+      <h2>Warum diese Seite gut funktioniert</h2>
+      <div class="grid">
+        <article class="feature">
+          <h3>🎬 Fokus aufs Video</h3>
+          <p class="muted">Großes, responsives Video‑Frame mit Posterbild, Download‑Link und optionalem Autoplay/Loop/Muted.</p>
+        </article>
+        <article class="feature">
+          <h3>⚡ Schnell & Einfach</h3>
+          <p class="muted">Alles in einer Datei. Leicht auf GitHub Pages zu hosten – kein Build‑Schritt nötig.</p>
+        </article>
+        <article class="feature">
+          <h3>📝 Barrierefrei</h3>
+          <p class="muted">Untertitel via <code>&lt;track&gt;</code>, sinnvolle ARIA‑Labels, gute Kontraste. Ideal für Sharing.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- TRANSCRIPT -->
+    <section class="section" aria-label="Transkript">
+      <h2>Transkript & Ressourcen</h2>
+      <details>
+        <summary>Transkript anzeigen</summary>
+        <p class="muted">Lege optional eine Datei <code>assets/captions.vtt</code> an und füge im <code>&lt;video&gt;</code> die Zeile hinzu:<br>
+        <code>&lt;track kind="captions" src="assets/captions.vtt" srclang="de" label="Deutsch" default&gt;</code></p>
+        <p>Hier kannst du außerdem eine kurze Zusammenfassung des Videos einfügen (SEO‑freundlich).</p>
+      </details>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" aria-label="FAQ">
+      <h2>FAQ</h2>
+      <div class="faq">
+        <details>
+          <summary>Wie ersetze ich das Video?</summary>
+          <p>Lade dein Video als <code>assets/avatar.mp4</code> hoch (H.264/AAC empfohlen). Alternativ passe die <code>src</code> im <code>&lt;source&gt;</code> an.</p>
+        </details>
+        <details>
+          <summary>Autoplay beim Laden?</summary>
+          <p>Füge dem <code>&lt;video&gt;</code> die Attribute <code>muted autoplay loop</code> hinzu, damit die meisten Browser automatisch abspielen.</p>
+        </details>
+        <details>
+          <summary>Wie ändere ich die Farben?</summary>
+          <p>Oben in <code>:root</code> die Variablen <code>--accent</code>, <code>--accent-2</code>, <code>--bg</code> usw. anpassen.</p>
+        </details>
+      </div>
+    </section>
+
+    <div class="hr" role="presentation"></div>
+
+    <!-- CONTACT / FOOTER -->
+    <section id="kontakt" class="section" aria-label="Kontakt">
+      <h2>Kontakt</h2>
+      <p class="muted">Fragen oder Feedback? Schreib mir eine Nachricht auf GitHub oder per E‑Mail.</p>
+      <p><a class="btn" href="mailto:you@example.com">E‑Mail senden</a></p>
+    </section>
+
+    <footer>
+      <p>© <span id="year"></span> Cartoon‑Avatar • Gebaut mit ❤️ und GitHub Pages</p>
+    </footer>
+  </main>
+
+  <script>
+    // Jahr im Footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Smooth scroll für interne Links
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const id = a.getAttribute('href').slice(1);
+        const el = document.getElementById(id);
+        if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      });
+    });
+  </script>
 </body>
 </html>

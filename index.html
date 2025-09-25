@@ -1,0 +1,80 @@
+<!doctype html>
+<div class="logo" aria-hidden="true"></div>
+<div>
+<h1>Mein Cartoon‑Avatar liest ein Buch</h1>
+<div class="note">Eine kleine Video-Seite, gehostet mit GitHub Pages</div>
+</div>
+</div>
+<div class="btns">
+<a class="button" href="#video" id="scrollToVideo">Zum Video</a>
+<a class="button" target="_blank" rel="noopener" href="https://github.com/">Repo öffnen</a>
+</div>
+</header>
+
+<main class="card">
+<div class="video-shell" id="video">
+<video
+controls
+playsinline
+preload="metadata"
+poster="assets/poster.jpg"
+aria-label="Cartoon-Avatar liest ein Buch">
+<source src="assets/avatar.mp4" type="video/mp4" />
+<!-- Fallback: -->
+Dein Browser unterstützt das HTML5-Video-Element nicht.
+</video>
+</div>
+
+<div class="meta">
+<p class="note">
+Tipp: Für Autoplay muss das Video <span class="kbd">muted</span> sein. Füge dazu das Attribut <span class="kbd">muted</span> am <span class="kbd">&lt;video&gt;</span>-Tag hinzu, wenn du möchtest, dass es beim Laden startet.
+</p>
+<div class="btns">
+<button id="toggleTheme" aria-pressed="false">Theme wechseln</button>
+<button id="playPause">Play/Pause</button>
+<a class="button" download href="assets/avatar.mp4">Video herunterladen</a>
+</div>
+</div>
+</main>
+
+<footer>
+<p>
+<strong>Hinweis zur Produktion des Cartoon-Videos:</strong> Du kannst dein Realvideo mit Tools wie "Cartoon" in After Effects, Toon Boom/Harmony, oder KI‑Stilisierung (z. B. Stable Video Diffusion, Runway) in einen Cartoon-Look umwandeln. Achte auf ein Seitenverhältnis, das zu dieser Seite passt (z. B. 16:9 oder 9:16).
+</p>
+</footer>
+</div>
+
+<script>
+const videoEl = document.querySelector('video');
+const toggleThemeBtn = document.getElementById('toggleTheme');
+const playPauseBtn = document.getElementById('playPause');
+const scrollBtn = document.getElementById('scrollToVideo');
+
+// Smooth scroll
+scrollBtn?.addEventListener('click', (e) => {
+e.preventDefault();
+document.getElementById('video')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+
+// Theme toggle (hell/dunkel)
+let dark = true;
+toggleThemeBtn?.addEventListener('click', () => {
+dark = !dark;
+document.documentElement.style.setProperty('--bg', dark ? '#0b1020' : '#f4f5ff');
+document.documentElement.style.setProperty('--card', dark ? '#11162a' : '#ffffff');
+document.documentElement.style.setProperty('--text', dark ? '#e9edff' : '#0b1020');
+document.documentElement.style.setProperty('--muted', dark ? '#9aa3c0' : '#44506b');
+toggleThemeBtn.setAttribute('aria-pressed', String(!dark));
+});
+
+// Play/Pause helper
+playPauseBtn?.addEventListener('click', async () => {
+if (videoEl.paused) {
+try { await videoEl.play(); } catch (e) { console.warn(e); }
+} else {
+videoEl.pause();
+}
+});
+</script>
+</body>
+</html>
